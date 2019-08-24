@@ -21,11 +21,11 @@
 5. Eine neue Datei namens `.env` mit nano erstellen:  
 **Kommand**: `nano .env`  
   
-6. Eure E-Mail Adresse, Password und Benachrichtungskanal definieren ohne die spitzigen klammern. Im Moment sind folgende Benachrichtungskanäle möglich (E-Mail, Slack). Falls ihr Slack auswählt, wird es beim #bot channel Meldungen schreiben:  
+6. Eure E-Mail Adresse, Password und Slack Web Hook URL definieren ohne die spitzigen klammern:  
 ```
 EMAIL=<eure_ibz_email_adresse>
 PASSWORD=<eure_ibz_passwort>
-ALERT_CHANNEL=email
+ALERT_CHANNEL=<slack_web_hook_url>
 ```  
 
 7. Die Daten speichern mit `CTRL + X`, dann `Y` und dann mit Taste `ENTER`.  
