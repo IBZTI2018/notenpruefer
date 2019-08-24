@@ -8,7 +8,7 @@
 1.  Den ordner `IBZ` beim folgenden Pfad mit sudo installieren `/`:  
 **Kommand**: `sudo mkdir /IBZ`  
 
-2. Den Ordner REchte für euren Benutzer geben:  
+2. Den Ordner Rechte für euren Benutzer geben:  
 **Kommand**: `sudo chown -R ${USER}:sudo /IBZ`  
 
 3. Den Ordner beitreten:  
