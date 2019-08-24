@@ -3,6 +3,7 @@
 #### Folgende Software muss beim Server installiert sein
 - [Docker](https://www.digitalocean.com/community/tutorials/so-installieren-und-verwenden-sie-docker-auf-ubuntu-18-04-de "Docker")
 - [Splash](https://splash.readthedocs.io/en/stable/install.html#linux-docker)
+- PHP -> `sudo apt install php7.2-cli`
 
 ## Skript bei eurem Computer installieren
 1.  Den ordner `IBZ` beim folgenden Pfad mit sudo installieren `/`:  
