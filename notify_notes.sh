@@ -4,7 +4,7 @@ CRAWLER_SOURCE=$(php -r "echo rawurlencode('$CRAWLER_SOURCE');")
 
 if curl -s --head  --request GET https://www.ibz.ch | grep "200 OK"
 then
-	curl -s -g "http://localhost:8050/execute?lua_source=$CRAWLER_SOURCE" > /tmp/currentResponse.txt
+    curl -s -g "http://localhost:8050/execute?lua_source=$CRAWLER_SOURCE" > /tmp/currentResponse.txt
     file1=`crc32 lastResponse.txt`
     file2=`crc32 /tmp/currentResponse.txt`
     if [ "$file1" = "$file2" ]
