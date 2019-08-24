@@ -31,6 +31,6 @@ ALERT_CHANNEL=<slack_web_hook_url>
 7. Die Daten speichern mit `CTRL + X`, dann `Y` und dann mit Taste `ENTER`.  
   
 8. Den Cronjob installieren, damit der Skript jede 5 Minute die Prüfungsnoten überprüfen kann:  
-`sudo bash -c "echo '*/5 * * * *	root	cd /IBZ && bash notify_notes.sh > /IBZ/log' >> /etc/crontab`"  
+`sudo bash -c "echo '*/5 * * * *	root	cd /IBZ && bash notify_notes.sh > /IBZ/log' >> /etc/crontab"`  
   
 9. Installation abgeschlossen. In 5 Minuten solltest du die 1. Meldung erhalten.
