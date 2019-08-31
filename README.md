@@ -4,6 +4,7 @@
 - [Docker](https://www.digitalocean.com/community/tutorials/so-installieren-und-verwenden-sie-docker-auf-ubuntu-18-04-de "Docker")
 - [Splash](https://splash.readthedocs.io/en/stable/install.html#linux-docker)
 - PHP -> `sudo apt install php7.2-cli`
+- CRC32 -> `sudo apt-get install libarchive-zip-perl`
 
 ## Skript bei eurem Computer installieren
 1.  Den ordner `IBZ` beim folgenden Pfad mit sudo installieren `/`:  
