@@ -1,4 +1,4 @@
-export $(cat .env | xargs)
+set -o allexport; source .env; set +o allexport
 CRAWLER_SOURCE=$(perl -pe 's/\$([_A-Z]+)/$ENV{$1}/g' < crawler.lua)
 CRAWLER_SOURCE=$(php -r "echo rawurlencode('$CRAWLER_SOURCE');")
 
