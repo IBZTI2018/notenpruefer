@@ -14,7 +14,7 @@ function main(splash, args)
                 return results;
             }
             for (var i=0, item; item = elements[i]; i++) {
-                var moduleName = item.querySelector(".x-grid3-td-3");
+                var moduleName = item.querySelector(".x-grid3-td-4");
                 var moduleNote = item.querySelector(".x-grid3-td-6");
                 results += moduleName.textContent + "\t" + moduleNote.textContent + "\n";
             }
