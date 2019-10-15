@@ -19,7 +19,8 @@ then
           exit
         fi
         NOTESDIFF=$(diff --suppress-common-lines -y /tmp/currentResponse.txt lastResponse.txt | perl -ne '/(.*?)(?:\t)(.*)\|/ && print "$1\n";')
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"Die Prüfungsnoten wurden aktualisiert!"}' $ALERT_CHANNEL
+        SLACK_MESSAGE=$(echo "$(<slack_message.json)" | m4 -DMODULE=IBZMODULE)
+        curl -X POST $ALERT_CHANNEL -d "'$SLACK_MESSAGE'"
         cat /tmp/currentResponse.txt > lastResponse.txt
     fi
 else
