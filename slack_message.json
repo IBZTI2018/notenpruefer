@@ -3,9 +3,9 @@
 	"icon_url": "https://emojis.slackmojis.com/emojis/images/1454927900/294/feels.png?1454927900",
     	"attachments": [
         {
-            "fallback": "Die Prüfungsnoten wurden aktualisiert!",
+            "fallback": "Prüfungsnoten wurden für den folgenden Fach aktualisiert:",
             "color": "#36a64f",
-            "pretext": "Die Prüfungsnoten wurden aktualisiert!",
+            "pretext": "Prüfungsnoten wurden für den folgenden Fach aktualisiert:",
             "title": "IBZMODULE"
         }
     ]
