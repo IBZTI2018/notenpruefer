@@ -22,11 +22,11 @@
 5. Eine neue Datei namens `.env` mit nano erstellen:  
 **Kommand**: `nano .env`  
   
-6. Eure E-Mail Adresse, Password und Slack Web Hook URL definieren ohne die spitzigen klammern:  
+6. Eure E-Mail Adresse, Password und Slack Web Hook URL definiert lassen ohne die spitzigen klammern:  
 ```
 EMAIL=<eure_ibz_email_adresse>
 PASSWORD=<eure_ibz_passwort>
-ALERT_CHANNEL=<slack_web_hook_url>
+ALERT_CHANNEL=https://hooks.slack.com/services/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
 ```  
 
 7. Die Daten speichern mit `CTRL + X`, dann `Y` und dann mit Taste `ENTER`.  
