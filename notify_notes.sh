@@ -14,6 +14,11 @@ then
         echo "Files have the same content"
     else
         echo "Files have NOT the same content"
+        if [[ $(cat /tmp/currentResponse.txt) == *"ERROR"* ]]; then
+          echo "Error from crawler.lua"
+          exit
+        fi
+        NOTESDIFF=$(diff --suppress-common-lines -y /tmp/currentResponse.txt lastResponse.txt | perl -ne '/(.*?)(?:\t)(.*)\|/ && print "$1\n";')
         curl -X POST -H 'Content-type: application/json' --data '{"text":"Die Prüfungsnoten wurden aktualisiert!"}' $ALERT_CHANNEL
         cat /tmp/currentResponse.txt > lastResponse.txt
     fi
