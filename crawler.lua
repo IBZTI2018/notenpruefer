@@ -6,8 +6,19 @@ function main(splash, args)
     splash:go{url="https://campus.ibz.ch/unterricht/studierende/noteneinsicht"}
     splash:wait{5}
     local notes = splash:jsfunc([[
-        function () {
-        return document.getElementById("ext-gen39").textContent;
+        function () {   
+            var elements = document.getElementById("ext-gen39").querySelectorAll("div.x-grid3-row");
+            var results = "";
+            if (elements.length < 2) {
+                results = "ERROR";
+                return results;
+            }
+            for (var i=0, item; item = elements[i]; i++) {
+                var moduleName = item.querySelector(".x-grid3-td-3");
+                var moduleNote = item.querySelector(".x-grid3-td-6");
+                results += moduleName.textContent + "\t" + moduleNote.textContent + "\n";
+            }
+            return results;
         }
     ]])
     return ("%s"):format(notes())
