@@ -26,7 +26,7 @@
 ```
 EMAIL=<eure_ibz_email_adresse>
 PASSWORD=<eure_ibz_passwort>
-ALERT_CHANNEL=https://hooks.slack.com/services/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
+ALERT_CHANNEL=<andre_für_webhook_fragen>
 ```  
 
 7. Die Daten speichern mit `CTRL + X`, dann `Y` und dann mit Taste `ENTER`.  
