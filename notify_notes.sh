@@ -19,7 +19,7 @@ then
           exit
         fi
         NOTESDIFF=$(diff --suppress-common-lines -y /tmp/currentResponse.txt lastResponse.txt | perl -ne '/(.*?)(?:\t)(.*)\|/ && print "$1\n";')
-        SLACK_MESSAGE=$(echo "$(<slack_message.json)" | m4 -DMODULE=IBZMODULE)
+        SLACK_MESSAGE=$(echo "$(<slack_message.json)" | m4 -DMODULE=$(echo "$NOTESDIFF"))
         curl -X POST $ALERT_CHANNEL -d @<(echo "$SLACK_MESSAGE")
         cat /tmp/currentResponse.txt > lastResponse.txt
     fi
