@@ -19,6 +19,7 @@ then
           exit
         fi
         NOTESDIFF=$(diff --suppress-common-lines -y /tmp/currentResponse.txt lastResponse.txt | perl -ne '/(.*?)(?:\t)(.*)\|/ && print "$1\n";')
+        NOTESDIFF=$(echo "$NOTESDIFF" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
         SLACK_MESSAGE=$(cat slack_message.json | sed "s/IBZMODULE/${NOTESDIFF}/g")
         curl -X POST $ALERT_CHANNEL -d @<(echo "$SLACK_MESSAGE")
         cat /tmp/currentResponse.txt > lastResponse.txt
