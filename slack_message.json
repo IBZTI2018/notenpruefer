@@ -6,7 +6,7 @@
             "fallback": "Die Prüfungsnoten wurden aktualisiert!",
             "color": "#36a64f",
             "pretext": "Die Prüfungsnoten wurden aktualisiert!",
-            "title": "$MODULE"
+            "title": "IBZMODULE"
         }
     ]
 }
