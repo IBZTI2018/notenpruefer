@@ -1,0 +1,12 @@
+{
+	"username": "Notenprüfer",
+	"icon_url": "https://emojis.slackmojis.com/emojis/images/1454927900/294/feels.png?1454927900",
+    "attachments": [
+        {
+            "fallback": "Required plain-text summary of the attachment.",
+            "color": "#36a64f",
+            "pretext": "Die Prüfungsnoten wurden aktualisiert!",
+            "title": "$MODULE"
+        }
+    ]
+}
