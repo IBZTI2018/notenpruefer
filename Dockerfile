@@ -12,7 +12,7 @@ RUN apk add chromium chromium-chromedriver
 RUN pip install --upgrade pip
 
 # Install selenium
-RUN pip install selenium
+RUN pip install selenium requests
 
 # Create a folder for our project
 RUN mkdir -p /app && \

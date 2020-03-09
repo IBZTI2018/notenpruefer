@@ -13,4 +13,5 @@ docker run -v ./shared:/shared notenpruefer
 ```
 
 ## Configuration
-For configuration, create the file `shared/credentials.txt` and fill it with `username::password`.
+* Create the file `shared/credentials.txt` and fill it with `username::password`.
+* Create the file `shared/webhook.txt` and fill it with the slack webhook uri.
