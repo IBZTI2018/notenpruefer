@@ -48,11 +48,12 @@ class notenpruefer():
     #while True:
     print("starting crawl round " + str(self.crawl_index) + "...")
     grades = self.crawl_grades()
-    self.crawl_cache = grades # REMOVE THIS AFTER TESTING
-    self.send_message_to_slack("no") # REMOVE
 
     #if crawl_index != 0:
     print(grades)
+
+    self.crawl_cache = grades # REMOVE THIS AFTER TESTING
+    self.send_message_to_slack("no") # REMOVE
     
     print("finished crawl round " + str(self.crawl_index) + ", waiting...")
     self.crawl_cache = grades
@@ -72,7 +73,7 @@ class notenpruefer():
       print("should be logged in now, saving as ibz3.png")
       self.driver.save_screenshot("/shared/ibz3.png")
 
-    return self.fetch_grades_from_overview()
+    return self.fetch_grades_from_overview2()
 
   def is_login_form_present(self):
     try:
@@ -107,6 +108,91 @@ class notenpruefer():
       grades[name] = grade
 
     return grades
+
+  def fetch_grades_from_overview2(self):
+    import re
+    # Intercept all XHR requests.
+    # If url contains 'SearchService'(URL for fetching grades) then save response to a variable named as rawInterceptedData
+    self.driver.execute_script("""
+      (function (XHR) {
+        "use strict";
+
+        var element = document.createElement('div');
+        element.id = "interceptedResponse";
+        element.appendChild(document.createTextNode(""));
+        document.body.appendChild(element);
+
+        var open = XHR.prototype.open;
+        var send = XHR.prototype.send;
+
+        XHR.prototype.open = function (method, url, async, user, pass) {
+          this._url = url; // want to track the url requested
+          open.call(this, method, url, async, user, pass);
+        };
+
+        XHR.prototype.send = function (data) {
+          var self = this;
+          var oldOnReadyStateChange;
+          var url = this._url;
+
+          function onReadyStateChange() {
+            if (self.status === 200 && self.readyState == 4 /* complete */) {
+              if (url.indexOf("SearchService") !== -1) {
+                window.rawInterceptedData = self.responseText;
+              }
+            }
+            if (oldOnReadyStateChange) {
+              oldOnReadyStateChange();
+            }
+          }
+
+          if (this.addEventListener) {
+            this.addEventListener("readystatechange", onReadyStateChange,
+              false);
+          } else {
+            oldOnReadyStateChange = this.onreadystatechange;
+            this.onreadystatechange = onReadyStateChange;
+          }
+          send.call(this, data);
+        }
+      })(XMLHttpRequest);
+    """)
+
+    # Run again the grades fetch function
+    # Since it is nested on a very deep object, it's almost impossible to run the fetch function with our own custom response handler.
+    self.driver.execute_script("""
+                Ext.onReady(function () {
+      var cfg = {};
+      cfg.widgetName = "user_grades";
+      cfg.widgetKey = "c6a67a56-b570-0001-903a-11f911e0114c";
+      nice2.flows.publicflows.PublicFlow.run("nice2.optional.qualification.publicflows.usergrades.UserGradesFlow", cfg);
+    });
+    """)
+
+    time.sleep(5)
+
+    rawInterceptedData = self.driver.execute_script(
+      "return window.rawInterceptedData")
+    regexWonder = "({createdEntities.+)\)\);"
+    cleanedInterceptedData = re.search(
+      regexWonder, rawInterceptedData).group(1)
+    grades = self.driver.execute_script("""
+                var cleanedInterceptedData = % s;
+    window.ibz_noten = [];
+    for (var row in cleanedInterceptedData.returnValue.rows) {
+      row = cleanedInterceptedData.returnValue.rows[row];
+      if ("cells" in row) {
+        var fach = row["cells"]["relInput.relInput_node.short"].cellValues[0].value;
+        var veranstaltung = row["cells"]["event"].cellValues[0].value;
+        var note = row["cells"]["rating"].cellValues[0].value;
+        ibz_noten.push([fach, veranstaltung, note]);
+      }
+    }
+    return window.ibz_noten;
+    """ % cleanedInterceptedData)
+
+    return grades
+
 
   def send_message_to_slack(self, grade_for):
     data = {
